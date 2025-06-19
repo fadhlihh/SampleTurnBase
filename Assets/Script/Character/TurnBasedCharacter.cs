@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +9,8 @@ public class TurnBasedCharacter : Character, IDamagable
     private CharacterData _data;
     [SerializeField]
     private Transform _attackerPosition;
+    [SerializeField]
+    private List<SkillData> _skills = new List<SkillData>();
 
     protected List<TurnBasedAction> _actions = new List<TurnBasedAction>();
 
@@ -16,9 +19,11 @@ public class TurnBasedCharacter : Character, IDamagable
     public UnityEvent<float, float> OnCharacterDamage;
     public UnityEvent<TurnBasedCharacter> OnCharacterDeath;
     public UnityEvent OnAttack;
+    public UnityEvent<float, float> OnPerformedSkill;
 
     private TurnBasedCharacter _target;
     private Vector3 _originPosition;
+    private List<StatModifier> _modifiers = new List<StatModifier>();
 
     public List<TurnBasedAction> Actions { get => _actions; }
     public UnityEvent<float, float> OnDamage => OnCharacterDamage;
@@ -27,13 +32,17 @@ public class TurnBasedCharacter : Character, IDamagable
     public int HealthPoint { get; set; }
     public int MaximumSkillPoint { get; set; }
     public int SkillPoint { get; set; }
-    public int DamagePoint { get; set; }
-    public int DefensePoint { get; set; }
-    public int Speed { get; set; }
+    public int BaseDamagePoint { get; set; }
+    public int BaseDefensePoint { get; set; }
+    public int BaseSpeed { get; set; }
+    public int DamagePoint => CalculateModifiedStat(EStatType.Damage);
+    public int DefensePoint => CalculateModifiedStat(EStatType.Defense);
+    public int Speed => CalculateModifiedStat(EStatType.Speed);
     public bool IsDefending { get; set; }
     public bool IsDead { get; protected set; }
     public CharacterData Data { get => _data; }
     public Vector3 AttackerPosition { get => (_attackerPosition != null) ? _attackerPosition.position : Vector3.zero; }
+    public List<SkillData> Skills { get => _skills; }
 
     protected virtual void Awake()
     {
@@ -50,6 +59,7 @@ public class TurnBasedCharacter : Character, IDamagable
     {
         Debug.Log($"{Data.Name} End Turn");
         OnEndTurn?.Invoke();
+        ReduceBuffDuration();
         TurnBasedManager.Instance.NextTurn();
     }
 
@@ -85,6 +95,12 @@ public class TurnBasedCharacter : Character, IDamagable
         OnAttack?.Invoke();
     }
 
+    public virtual void PerformSkill(int skillPointCost)
+    {
+        OnPerformedSkill?.Invoke(SkillPoint, MaximumSkillPoint);
+        EndTurn();
+    }
+
     public void HandleEndAction()
     {
         _target = null;
@@ -92,9 +108,34 @@ public class TurnBasedCharacter : Character, IDamagable
         EndTurn();
     }
 
-    public void SetSpeed(int value)
+    public void ApplyBuff(EStatType type, int value, int duration)
     {
-        Speed = value;
+        _modifiers.Add(new StatModifier(type, value, duration));
+    }
+
+    public int CalculateModifiedStat(EStatType type)
+    {
+        int baseValue = type switch
+        {
+            EStatType.Speed => BaseSpeed,
+            EStatType.Damage => BaseDamagePoint,
+            EStatType.Defense => BaseDamagePoint
+        };
+
+        int modifiers = _modifiers.Where(item => item.Type == type).Sum(item => item.Value);
+        return baseValue + modifiers;
+    }
+
+    public void ReduceBuffDuration()
+    {
+        for (int i = _modifiers.Count - 1; i >= 0; i--)
+        {
+            _modifiers[i].Duration--;
+            if (_modifiers[i].Duration == 0)
+            {
+                _modifiers.RemoveAt(i);
+            }
+        }
     }
 
     protected void InitializeData()
@@ -103,9 +144,9 @@ public class TurnBasedCharacter : Character, IDamagable
         MaximumHealthPoint = Data.MaximumHealthPoint;
         SkillPoint = Data.MaximumSkillPoint;
         MaximumSkillPoint = Data.MaximumSkillPoint;
-        DamagePoint = Data.DamagePoint;
-        DefensePoint = Data.DefensePoint;
-        Speed = Data.Speed;
+        BaseDamagePoint = Data.DamagePoint;
+        BaseDefensePoint = Data.DefensePoint;
+        BaseSpeed = Data.Speed;
         _originPosition = transform.position;
     }
 }

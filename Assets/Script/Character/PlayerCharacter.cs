@@ -8,6 +8,7 @@ public class PlayerCharacter : TurnBasedCharacter
         base.Awake();
         _actions.Add(new PlayerAttackAction());
         _actions.Add(new DefenseAction());
+        _actions.Add(new SkillAction(Skills));
     }
 
     public override void BeginTurn()
@@ -18,5 +19,11 @@ public class PlayerCharacter : TurnBasedCharacter
     public override void EndTurn()
     {
         base.EndTurn();
+    }
+
+    public override void PerformSkill(int skillPointCost)
+    {
+        SkillPoint -= skillPointCost;
+        base.PerformSkill(skillPointCost);
     }
 }

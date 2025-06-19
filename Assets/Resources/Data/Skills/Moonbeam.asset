@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebdfe192db1ff4c489d123673dac96e6, type: 3}
+  m_Name: Moonbeam
+  m_EditorClassIdentifier: 
+  Name: Moonbeam
+  SkillPoint: 30
+  Description: Spell moonbeam to target, make target receive 60 damage
+  VisualFX: {fileID: 1601506141239540749, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
+  DamagePoint: 60

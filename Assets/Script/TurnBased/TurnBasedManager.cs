@@ -35,6 +35,11 @@ public class TurnBasedManager : SingletonBehaviour<TurnBasedManager>
         }
     }
 
+    public void CancelAction()
+    {
+        HUDManager.Instance.PlayerActionUI.Show();
+    }
+
     public void NextTurn()
     {
         if (_characterTurn.Count <= 0)

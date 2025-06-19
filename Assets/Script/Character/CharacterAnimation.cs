@@ -38,6 +38,11 @@ public class CharacterAnimation : MonoBehaviour
         _animator.Play("Death");
     }
 
+    public void PlaySkillAnimation()
+    {
+        _animator.Play("Perform Skill");
+    }
+
     public void HitTarget()
     {
         OnHitTarget?.Invoke();
