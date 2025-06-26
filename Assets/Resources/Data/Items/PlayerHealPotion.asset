@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d71c344eb0a8ac469f3c95e76dac7e7, type: 3}
+  m_Name: PlayerHealPotion
+  m_EditorClassIdentifier: 
+  Name: Heal Potion
+  Description: Potion that heal 10 health
+  VisualFX: {fileID: 6211125795773073634, guid: 6bd4469d8758f1d4099908c0f6c9aacd, type: 3}
+  Amount: 20
+  EffectType: 0
+  TargetingMode: 1

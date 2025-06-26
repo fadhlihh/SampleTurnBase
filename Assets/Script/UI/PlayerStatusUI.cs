@@ -22,6 +22,8 @@ public class PlayerStatusUI : MonoBehaviour
             item.SetSkillPoint(character.SkillPoint, character.Data.MaximumSkillPoint);
             item.SetPotraitImage(character.Data.IconImage);
             character.OnDamage.AddListener(item.SetHealthPoint);
+            character.OnHeal.AddListener(item.SetHealthPoint);
+            character.OnRestoreSkillPoint.AddListener(item.SetSkillPoint);
             character.OnPerformedSkill.AddListener(item.SetSkillPoint);
             character.OnDeath.AddListener(character => item.ShowDeadOverlay());
             _bindings.Add((character, item));

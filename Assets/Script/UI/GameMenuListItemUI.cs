@@ -13,5 +13,5 @@ public abstract class GameMenuListItemUI<T> : MonoBehaviour
     public string Description { get; protected set; }
     public bool IsDisabled { get; protected set; }
 
-    public abstract void SetData(T data, TurnBasedCharacter instigator, Action onSelectItem, Action<string> onHoverItem, Action onExitItem);
+    public abstract void SetData(T data, TurnBasedCharacter instigator, Action<T, TurnBasedCharacter> onSelectItem, Action<string> onHoverItem, Action onExitItem);
 }

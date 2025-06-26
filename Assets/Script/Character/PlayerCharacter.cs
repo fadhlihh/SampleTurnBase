@@ -9,6 +9,7 @@ public class PlayerCharacter : TurnBasedCharacter
         _actions.Add(new PlayerAttackAction());
         _actions.Add(new DefenseAction());
         _actions.Add(new SkillAction(Skills));
+        _actions.Add(new ItemAction(Items));
     }
 
     public override void BeginTurn()

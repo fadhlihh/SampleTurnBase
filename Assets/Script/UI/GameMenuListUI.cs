@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Fadhli.Framework;
 using TMPro;
@@ -25,15 +26,20 @@ public class GameMenuListUI<T> : SingletonBehaviour<GameMenuListUI<T>>
 
     private List<GameMenuListItemUI<T>> _gameMenuListItems = new List<GameMenuListItemUI<T>>();
 
-    public void Show(IEnumerable<T> itemDataList, TurnBasedCharacter instigator)
+    public void Show(IEnumerable<T> itemDataList, TurnBasedCharacter instigator, Action<T, TurnBasedCharacter> onSelectItem)
     {
         foreach (T gameMenuListItem in itemDataList)
         {
             GameMenuListItemUI<T> item = Instantiate<GameMenuListItemUI<T>>(_gameMenuListItemPrefabs);
             item.transform.SetParent(_gameMenuRect, false);
-            item.SetData(gameMenuListItem, instigator, OnSelectItem, OnHoverItem, OnExitItem);
+            item.SetData(gameMenuListItem, instigator, (item, instigator) =>
+            {
+                onSelectItem?.Invoke(item, instigator);
+                OnSelectItem();
+            }, OnHoverItem, OnExitItem);
             _gameMenuListItems.Add(item);
         }
+        onSelectItem += (item, instigator) => OnSelectItem();
         _titleText.text = _title;
         _titleBackground.color = _titleColor;
         _gameMenuList.SetActive(true);
@@ -62,6 +68,7 @@ public class GameMenuListUI<T> : SingletonBehaviour<GameMenuListUI<T>>
 
     public void ClearItems()
     {
+        Debug.Log("Clear");
         foreach (GameMenuListItemUI<T> item in _gameMenuListItems)
         {
             Destroy(item.gameObject);

@@ -708,6 +708,22 @@ PrefabInstance:
       propertyPath: _healthPoint
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: _items.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: _skills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: '_items.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: eccc8695fc7e23a45a4125f2e044d847, type: 2}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: '_skills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 386fa11daeb589d41acac3fe9755c02f, type: 2}
     m_RemovedComponents:
     - {fileID: 37953225274570229, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
     m_RemovedGameObjects: []
@@ -3188,6 +3204,22 @@ PrefabInstance:
       propertyPath: _healthPoint
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: _items.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: _skills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: '_items.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: eccc8695fc7e23a45a4125f2e044d847, type: 2}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: '_skills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 386fa11daeb589d41acac3fe9755c02f, type: 2}
     m_RemovedComponents:
     - {fileID: 37953225274570229, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
     m_RemovedGameObjects: []
@@ -3406,9 +3438,25 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
+      propertyPath: _items.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
       propertyPath: _skills.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
+      propertyPath: '_items.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f9bdb4992e196d445bea2d52a063c15a, type: 2}
+    - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
+      propertyPath: '_items.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f9bdb4992e196d445bea2d52a063c15a, type: 2}
+    - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
+      propertyPath: '_items.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fba713c952fcee4ebbc133be84dc674, type: 2}
     - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
       propertyPath: '_skills.Array.data[0]'
       value: 
@@ -4100,6 +4148,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2020312085}
+        m_TargetAssemblyTypeName: GameMenuListUI`1[[Item, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1996839569 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5098062380633948778, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
@@ -4149,6 +4209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2020312083}
   - component: {fileID: 2020312084}
+  - component: {fileID: 2020312085}
   m_Layer: 0
   m_Name: GameMenuListUI
   m_TagString: Untagged
@@ -4188,9 +4249,29 @@ MonoBehaviour:
   _gameMenuListItemPrefabs: {fileID: 7413367007525916900, guid: 56051a606abc26d4caf1f3e898bb4446, type: 3}
   _descriptionText: {fileID: 448236763}
   _titleBackground: {fileID: 1605383273}
-  _titleColor: {r: 0.28627452, g: 0.8000001, b: 0, a: 1}
+  _titleColor: {r: 0.33333334, g: 0.7843138, b: 0.45098042, a: 1}
   _titleText: {fileID: 778190215}
   _title: Skill
+--- !u!114 &2020312085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020312082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a8d9a61032d2c84f9f74101a4f2db48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameMenuList: {fileID: 14213266}
+  _gameMenuRect: {fileID: 1895764861}
+  _gameMenuListItemPrefabs: {fileID: 2695852800244940274, guid: 252226ffe7965eb4895c5962ba21def9, type: 3}
+  _descriptionText: {fileID: 448236763}
+  _titleBackground: {fileID: 1605383273}
+  _titleColor: {r: 0.83921576, g: 0.77647066, b: 0.3019608, a: 1}
+  _titleText: {fileID: 778190215}
+  _title: Item
 --- !u!1 &2088397118
 GameObject:
   m_ObjectHideFlags: 0
@@ -7917,6 +7998,22 @@ PrefabInstance:
       propertyPath: _healthPoint
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: _items.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: _skills.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: '_items.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: eccc8695fc7e23a45a4125f2e044d847, type: 2}
+    - target: {fileID: 8632868141506747920, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
+      propertyPath: '_skills.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 386fa11daeb589d41acac3fe9755c02f, type: 2}
     m_RemovedComponents:
     - {fileID: 37953225274570229, guid: df48a261b037c384e91fc7f0f47edf6b, type: 3}
     m_RemovedGameObjects: []
@@ -12396,9 +12493,25 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
+      propertyPath: _items.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
       propertyPath: _skills.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
+      propertyPath: '_items.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f9bdb4992e196d445bea2d52a063c15a, type: 2}
+    - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
+      propertyPath: '_items.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f9bdb4992e196d445bea2d52a063c15a, type: 2}
+    - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
+      propertyPath: '_items.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fba713c952fcee4ebbc133be84dc674, type: 2}
     - target: {fileID: 3702392544101518200, guid: 1654c1b9b00ada048a340ca3a51d1eeb, type: 3}
       propertyPath: '_skills.Array.data[0]'
       value: 

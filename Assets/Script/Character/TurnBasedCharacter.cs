@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class TurnBasedCharacter : Character, IDamagable
     private Transform _attackerPosition;
     [SerializeField]
     private List<SkillData> _skills = new List<SkillData>();
+    [SerializeField]
+    private List<ItemData> _items = new List<ItemData>();
 
     protected List<TurnBasedAction> _actions = new List<TurnBasedAction>();
 
@@ -20,6 +23,8 @@ public class TurnBasedCharacter : Character, IDamagable
     public UnityEvent<TurnBasedCharacter> OnCharacterDeath;
     public UnityEvent OnAttack;
     public UnityEvent<float, float> OnPerformedSkill;
+    public UnityEvent<float, float> OnHeal;
+    public UnityEvent<float, float> OnRestoreSkillPoint;
 
     private TurnBasedCharacter _target;
     private Vector3 _originPosition;
@@ -43,6 +48,7 @@ public class TurnBasedCharacter : Character, IDamagable
     public CharacterData Data { get => _data; }
     public Vector3 AttackerPosition { get => (_attackerPosition != null) ? _attackerPosition.position : Vector3.zero; }
     public List<SkillData> Skills { get => _skills; }
+    public List<ItemData> Items { get => _items; }
 
     protected virtual void Awake()
     {
@@ -136,6 +142,20 @@ public class TurnBasedCharacter : Character, IDamagable
                 _modifiers.RemoveAt(i);
             }
         }
+    }
+
+    public void Heal(int value)
+    {
+        HealthPoint = Math.Clamp(HealthPoint + value, 0, MaximumHealthPoint);
+        Debug.Log($"Heal: {HealthPoint}");
+        OnHeal?.Invoke(HealthPoint, MaximumHealthPoint);
+    }
+
+    public void RestoreSkillPoint(int value)
+    {
+        SkillPoint = Math.Clamp(SkillPoint + value, 0, MaximumSkillPoint);
+        Debug.Log($"Restore: {SkillPoint}");
+        OnRestoreSkillPoint?.Invoke(SkillPoint, MaximumSkillPoint);
     }
 
     protected void InitializeData()

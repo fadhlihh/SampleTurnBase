@@ -2,18 +2,19 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class SkillListItemUI : GameMenuListItemUI<SkillData>
+public class ItemListItemUI : GameMenuListItemUI<Item>
 {
     [SerializeField]
     private TMP_Text _nameText;
     [SerializeField]
-    private TMP_Text _skillPointText;
+    private TMP_Text _quantityText;
 
-    public override void SetData(SkillData data, TurnBasedCharacter instigator, Action<SkillData, TurnBasedCharacter> onSelectItem, Action<string> onHoverItem, Action onExitItem)
+    public override void SetData(Item data, TurnBasedCharacter instigator, Action<Item, TurnBasedCharacter> onSelectItem, Action<string> onHoverItem, Action onExitItem)
     {
-        _nameText.text = data.Name;
-        _skillPointText.text = data.SkillPoint.ToString();
-        if (instigator.SkillPoint < data.SkillPoint)
+        _nameText.text = data.Data.Name;
+        _quantityText.text = data.Quantity.ToString();
+        Description = data.Data.Description;
+        if (data.Quantity <= 0)
         {
             IsDisabled = true;
             _disabledOverlay.SetActive(true);
@@ -23,7 +24,6 @@ public class SkillListItemUI : GameMenuListItemUI<SkillData>
             IsDisabled = false;
             _disabledOverlay.SetActive(false);
         }
-        Description = data.Description;
         OnSelectItem += () => onSelectItem(data, instigator);
         OnHoverItem = onHoverItem;
         OnExitItem = onExitItem;

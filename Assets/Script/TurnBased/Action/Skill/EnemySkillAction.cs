@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillAction : TurnBasedAction
+public class EnemySkillAction : TurnBasedAction
 {
     private List<SkillData> _skills = new List<SkillData>();
 
-    public SkillAction()
+    public EnemySkillAction()
     {
         Type = EActionCategory.Skill;
     }
 
-    public SkillAction(List<SkillData> skills)
+    public EnemySkillAction(List<SkillData> skills)
     {
         Type = EActionCategory.Skill;
         _skills = skills;
@@ -19,11 +19,7 @@ public class SkillAction : TurnBasedAction
 
     public override void Execute(TurnBasedCharacter instigator)
     {
-        SkillMenuUI.Instance.Show(_skills, instigator, UseSkill);
-    }
-
-    public void UseSkill(SkillData skill, TurnBasedCharacter instigator)
-    {
-        skill.Execute(instigator);
+        int randomIndex = Random.Range(0, _skills.Count);
+        _skills[randomIndex].Execute(instigator);
     }
 }
