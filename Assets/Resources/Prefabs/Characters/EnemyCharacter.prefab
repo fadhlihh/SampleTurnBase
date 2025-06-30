@@ -36,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 5247206461536659971}
   - {fileID: 2843005460623481031}
+  - {fileID: 997106094133358774}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2871620993728794909
@@ -74,6 +75,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data: {fileID: 0}
   _attackerPosition: {fileID: 5247206461536659971}
+  _lookPivot: {fileID: 997106094133358774}
+  _skills: []
+  _items: []
   OnBeginTurn:
     m_PersistentCalls:
       m_Calls: []
@@ -125,6 +129,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnPerformedSkill:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRestoreSkillPoint:
+    m_PersistentCalls:
+      m_Calls: []
   _enemyUI: {fileID: 4828275515075950346}
 --- !u!114 &5036593213560821174
 MonoBehaviour:
@@ -520,6 +533,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &7702832131439135689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 997106094133358774}
+  m_Layer: 0
+  m_Name: LookPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &997106094133358774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7702832131439135689}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 690832106761379570}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8933976242291228292
 GameObject:
   m_ObjectHideFlags: 0

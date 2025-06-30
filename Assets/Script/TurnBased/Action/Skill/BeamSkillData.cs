@@ -10,8 +10,10 @@ public class BeamSkillData : SkillData
     {
         Debug.Log($"{instigator.Data.Name} Choose Skill {Name}");
         IEnumerable<TurnBasedCharacter> enemies = TurnBasedManager.Instance.GetAlliveEnemy();
+        CameraManager.Instance.SwitchCamera(ECameraType.EnemyCamera, instigator);
         TargetSelector.Instance.StartSelectCharacter(enemies, target =>
                 {
+                    CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
                     instigator.PerformSkill(SkillPoint);
                     Instantiate<ParticleSystem>(VisualFX, target.transform);
                     target.Damage(DamagePoint);

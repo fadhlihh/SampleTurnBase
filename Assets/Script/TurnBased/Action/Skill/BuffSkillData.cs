@@ -25,9 +25,13 @@ public class BuffSkillData : SkillData
                 IEnumerable<TurnBasedCharacter> targets = instigator is PlayerCharacter ?
                 TurnBasedManager.Instance.GetAllivePlayer() :
                 TurnBasedManager.Instance.GetAlliveEnemy();
-
+                if (instigator is PlayerCharacter)
+                {
+                    CameraManager.Instance.SwitchCamera(ECameraType.AllyCamera, instigator);
+                }
                 TargetSelector.Instance.StartSelectCharacter(targets, target =>
                 {
+                    CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
                     target.ApplyBuff(BuffedStat, Amount, Duration);
                     Instantiate<ParticleSystem>(VisualFX, target.transform);
                     Debug.Log($"{instigator.Data.Name} Apply Skill {Name} on {target}");

@@ -37,6 +37,7 @@ public class TurnBasedManager : SingletonBehaviour<TurnBasedManager>
 
     public void CancelAction()
     {
+        CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
         HUDManager.Instance.PlayerActionUI.Show();
     }
 

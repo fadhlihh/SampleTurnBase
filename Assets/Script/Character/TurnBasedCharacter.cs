@@ -11,6 +11,8 @@ public class TurnBasedCharacter : Character, IDamagable
     [SerializeField]
     private Transform _attackerPosition;
     [SerializeField]
+    private Transform _lookPivot;
+    [SerializeField]
     private List<SkillData> _skills = new List<SkillData>();
     [SerializeField]
     private List<ItemData> _items = new List<ItemData>();
@@ -47,6 +49,7 @@ public class TurnBasedCharacter : Character, IDamagable
     public bool IsDead { get; protected set; }
     public CharacterData Data { get => _data; }
     public Vector3 AttackerPosition { get => (_attackerPosition != null) ? _attackerPosition.position : Vector3.zero; }
+    public Transform LookPivot { get => _lookPivot; }
     public List<SkillData> Skills { get => _skills; }
     public List<ItemData> Items { get => _items; }
 
@@ -64,6 +67,7 @@ public class TurnBasedCharacter : Character, IDamagable
     public virtual void EndTurn()
     {
         Debug.Log($"{Data.Name} End Turn");
+        CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
         OnEndTurn?.Invoke();
         ReduceBuffDuration();
         TurnBasedManager.Instance.NextTurn();
@@ -97,6 +101,7 @@ public class TurnBasedCharacter : Character, IDamagable
     {
         _target = target;
         transform.position = target.AttackerPosition;
+        CameraManager.Instance.SwitchCamera(ECameraType.AttackCamera, this, target);
         IsDefending = false;
         OnAttack?.Invoke();
     }

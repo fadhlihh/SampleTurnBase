@@ -20,6 +20,7 @@ public class PlayerCharacter : TurnBasedCharacter
     public override void EndTurn()
     {
         base.EndTurn();
+        HUDManager.Instance.CharacterTurnUI.Show();
     }
 
     public override void PerformSkill(int skillPointCost)

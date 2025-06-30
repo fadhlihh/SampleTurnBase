@@ -22,9 +22,13 @@ public class PotionData : ItemData
                 IEnumerable<TurnBasedCharacter> targets = instigator is PlayerCharacter ?
                 TurnBasedManager.Instance.GetAllivePlayer() :
                 TurnBasedManager.Instance.GetAlliveEnemy();
-
+                if (instigator is PlayerCharacter)
+                {
+                    CameraManager.Instance.SwitchCamera(ECameraType.AllyCamera, instigator);
+                }
                 TargetSelector.Instance.StartSelectCharacter(targets, target =>
                 {
+                    CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
                     Consume(target);
                     Instantiate<ParticleSystem>(VisualFX, target.transform);
                     instigator.EndTurn();

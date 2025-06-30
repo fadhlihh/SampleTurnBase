@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlayerStatusUI : MonoBehaviour
 {
     [SerializeField]
+    protected GameObject _panel;
+    [SerializeField]
     private PlayerStatusItemUI _playerStatusItemUIPrefab;
     [SerializeField]
     private Transform _playerStatusUIRect;
@@ -28,5 +30,15 @@ public class PlayerStatusUI : MonoBehaviour
             character.OnDeath.AddListener(character => item.ShowDeadOverlay());
             _bindings.Add((character, item));
         }
+    }
+
+    public void Show()
+    {
+        _panel.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        _panel.SetActive(false);
     }
 }

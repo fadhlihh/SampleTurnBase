@@ -41,6 +41,13 @@ public class CharacterAnimation : MonoBehaviour
     public void PlaySkillAnimation()
     {
         _animator.Play("Perform Skill");
+        Debug.Log(_ownerCharacter.gameObject.name);
+    }
+
+    public void PlayConsumeItemAnimation()
+    {
+        _animator.Play("Drink");
+        Debug.Log(_ownerCharacter.gameObject.name);
     }
 
     public void HitTarget()

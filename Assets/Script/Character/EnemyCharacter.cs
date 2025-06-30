@@ -19,6 +19,7 @@ public class EnemyCharacter : TurnBasedCharacter
         _enemyUI.EnemyStatusUI.SetHealthBar(HealthPoint, MaximumHealthPoint);
         OnDamage.AddListener(_enemyUI.EnemyStatusUI.SetHealthBar);
         OnDeath.AddListener(character => _enemyUI.Hide());
+        OnHeal.AddListener(_enemyUI.EnemyStatusUI.SetHealthBar);
         _enemyUI.Show();
     }
 

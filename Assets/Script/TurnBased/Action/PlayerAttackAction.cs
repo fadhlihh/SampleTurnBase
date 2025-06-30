@@ -12,7 +12,7 @@ public class PlayerAttackAction : TurnBasedAction
     {
         List<EnemyCharacter> enemies = TurnBasedManager.Instance.GetAlliveEnemy();
         Debug.Log($"{instigator.Data.name} Choose Attack");
-
+        CameraManager.Instance.SwitchCamera(ECameraType.EnemyCamera, instigator);
         TargetSelector.Instance.StartSelectCharacter(enemies, target =>
         {
             Debug.Log($"{instigator.Data.name} Attack {target.Data.Name}");

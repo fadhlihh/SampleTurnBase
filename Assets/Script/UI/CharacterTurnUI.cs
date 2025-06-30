@@ -5,9 +5,12 @@ using UnityEngine.Events;
 public class CharacterTurnUI : MonoBehaviour
 {
     [SerializeField]
+    protected GameObject _panel;
+    [SerializeField]
     protected Transform _turnItemUIRect;
     [SerializeField]
     protected CharacterTurnItemUI _turnItemPrefab;
+
     private List<(TurnBasedCharacter character, CharacterTurnItemUI item)> _bindings = new();
 
     public void InitializeTurnItem(List<TurnBasedCharacter> characters)
@@ -69,5 +72,15 @@ public class CharacterTurnUI : MonoBehaviour
     {
         var binding = _bindings.Find(bindItem => bindItem.character == character);
         binding.item?.HideDeadOverlay();
+    }
+
+    public void Show()
+    {
+        _panel.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        _panel.SetActive(false);
     }
 }

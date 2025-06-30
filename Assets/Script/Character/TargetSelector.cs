@@ -13,6 +13,7 @@ public class TargetSelector : SingletonBehaviour<TargetSelector>
     public void StartSelectCharacter(IEnumerable<TurnBasedCharacter> targets, Action<TurnBasedCharacter> onSelected)
     {
         OnTargetSelected = onSelected;
+        HUDManager.Instance.CharacterTurnUI.Hide();
         foreach (TurnBasedCharacter target in targets)
         {
             ClickableTarget selector = target.GetComponent<ClickableTarget>();
@@ -34,16 +35,19 @@ public class TargetSelector : SingletonBehaviour<TargetSelector>
 
     public void OnTargetClicked(TurnBasedCharacter target)
     {
-        foreach (TurnBasedCharacter listedTarget in _targetList)
+        if (!target.IsDead)
         {
-            ClickableTarget selector = listedTarget.GetComponent<ClickableTarget>();
-            if (selector != null)
+            foreach (TurnBasedCharacter listedTarget in _targetList)
             {
-                selector.OnClicked.RemoveListener(OnTargetClicked);
+                ClickableTarget selector = listedTarget.GetComponent<ClickableTarget>();
+                if (selector != null)
+                {
+                    selector.OnClicked.RemoveListener(OnTargetClicked);
+                }
             }
+            SelectTarget(target);
+            _targetList.Clear();
         }
-        SelectTarget(target);
-        _targetList.Clear();
     }
 
     private void SelectTarget(TurnBasedCharacter target)

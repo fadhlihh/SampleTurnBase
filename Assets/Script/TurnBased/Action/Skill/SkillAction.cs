@@ -19,6 +19,8 @@ public class SkillAction : TurnBasedAction
 
     public override void Execute(TurnBasedCharacter instigator)
     {
+        HUDManager.Instance.CharacterTurnUI.Hide();
+        CameraManager.Instance.SwitchCamera(ECameraType.SelfCamera, instigator);
         SkillMenuUI.Instance.Show(_skills, instigator, UseSkill);
     }
 
