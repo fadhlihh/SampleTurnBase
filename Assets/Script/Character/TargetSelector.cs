@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fadhli.Framework;
-using UnityEngine;
 
 public class TargetSelector : SingletonBehaviour<TargetSelector>
 {
@@ -21,6 +20,7 @@ public class TargetSelector : SingletonBehaviour<TargetSelector>
             {
                 _targetList.Add(target);
                 selector.OnClicked.AddListener(OnTargetClicked);
+                selector.IsSelecting = true;
             }
         }
     }
@@ -43,6 +43,7 @@ public class TargetSelector : SingletonBehaviour<TargetSelector>
                 if (selector != null)
                 {
                     selector.OnClicked.RemoveListener(OnTargetClicked);
+                    selector.IsSelecting = false;
                 }
             }
             SelectTarget(target);

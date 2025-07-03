@@ -13,6 +13,8 @@ public class TurnBasedCharacter : Character, IDamagable
     [SerializeField]
     private Transform _lookPivot;
     [SerializeField]
+    private FloatNumberUI _floatNumberUI;
+    [SerializeField]
     private List<SkillData> _skills = new List<SkillData>();
     [SerializeField]
     private List<ItemData> _items = new List<ItemData>();
@@ -27,6 +29,7 @@ public class TurnBasedCharacter : Character, IDamagable
     public UnityEvent<float, float> OnPerformedSkill;
     public UnityEvent<float, float> OnHeal;
     public UnityEvent<float, float> OnRestoreSkillPoint;
+    public UnityEvent<bool> OnDefending;
 
     private TurnBasedCharacter _target;
     private Vector3 _originPosition;
@@ -77,9 +80,11 @@ public class TurnBasedCharacter : Character, IDamagable
     {
         int damageModifier = 0;
         damageModifier += IsDefending ? -DefensePoint : 0;
+        _floatNumberUI.Show($"{value + damageModifier}");
         HealthPoint -= value + damageModifier;
         OnDamage?.Invoke(HealthPoint, MaximumHealthPoint);
         IsDefending = false;
+        OnDefending?.Invoke(IsDefending);
         if (HealthPoint <= 0)
         {
             Death();
@@ -94,6 +99,7 @@ public class TurnBasedCharacter : Character, IDamagable
 
     public void HandleHitTarget()
     {
+        SFXManager.Instance.PunchSFX?.Play();
         _target.Damage(DamagePoint);
     }
 
@@ -103,6 +109,7 @@ public class TurnBasedCharacter : Character, IDamagable
         transform.position = target.AttackerPosition;
         CameraManager.Instance.SwitchCamera(ECameraType.AttackCamera, this, target);
         IsDefending = false;
+        OnDefending?.Invoke(IsDefending);
         OnAttack?.Invoke();
     }
 
@@ -151,6 +158,7 @@ public class TurnBasedCharacter : Character, IDamagable
 
     public void Heal(int value)
     {
+        _floatNumberUI.Show($"+{value}");
         HealthPoint = Math.Clamp(HealthPoint + value, 0, MaximumHealthPoint);
         Debug.Log($"Heal: {HealthPoint}");
         OnHeal?.Invoke(HealthPoint, MaximumHealthPoint);
@@ -158,6 +166,7 @@ public class TurnBasedCharacter : Character, IDamagable
 
     public void RestoreSkillPoint(int value)
     {
+        _floatNumberUI.Show($"+{value}");
         SkillPoint = Math.Clamp(SkillPoint + value, 0, MaximumSkillPoint);
         Debug.Log($"Restore: {SkillPoint}");
         OnRestoreSkillPoint?.Invoke(SkillPoint, MaximumSkillPoint);

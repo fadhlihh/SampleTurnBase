@@ -10,6 +10,7 @@ public class DefenseAction : TurnBasedAction
     public override void Execute(TurnBasedCharacter instigator)
     {
         instigator.IsDefending = true;
+        instigator.OnDefending?.Invoke(instigator.IsDefending);
         Debug.Log($"{instigator.Data.Name} Defending");
         instigator.EndTurn();
     }

@@ -16,6 +16,7 @@ public class BeamSkillData : SkillData
                     CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
                     instigator.PerformSkill(SkillPoint);
                     Instantiate<ParticleSystem>(VisualFX, target.transform);
+                    SFXManager.Instance.BeamSpellSFX?.Play();
                     target.Damage(DamagePoint);
                 });
     }

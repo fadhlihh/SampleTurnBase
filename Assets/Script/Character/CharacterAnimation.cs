@@ -59,4 +59,9 @@ public class CharacterAnimation : MonoBehaviour
     {
         OnEndActionAnimation?.Invoke();
     }
+
+    public void SetDefenseAnimation(bool value)
+    {
+        _animator.SetBool("IsDefending", value);
+    }
 }

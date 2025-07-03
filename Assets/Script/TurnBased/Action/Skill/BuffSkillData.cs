@@ -18,6 +18,7 @@ public class BuffSkillData : SkillData
             case ETargetingMode.Self:
                 instigator.ApplyBuff(BuffedStat, Amount, Duration);
                 Instantiate<ParticleSystem>(VisualFX, instigator.transform);
+                SFXManager.Instance.BuffSpellSFX?.Play();
                 Debug.Log($"{instigator.Data.Name} Apply Skill {Name} on self");
                 instigator.PerformSkill(SkillPoint);
                 break;
@@ -34,6 +35,7 @@ public class BuffSkillData : SkillData
                     CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
                     target.ApplyBuff(BuffedStat, Amount, Duration);
                     Instantiate<ParticleSystem>(VisualFX, target.transform);
+                    SFXManager.Instance.BuffSpellSFX?.Play();
                     Debug.Log($"{instigator.Data.Name} Apply Skill {Name} on {target}");
                     instigator.PerformSkill(SkillPoint);
                 });
