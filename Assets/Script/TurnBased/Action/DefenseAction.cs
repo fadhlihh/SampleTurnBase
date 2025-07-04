@@ -12,6 +12,6 @@ public class DefenseAction : TurnBasedAction
         instigator.IsDefending = true;
         instigator.OnDefending?.Invoke(instigator.IsDefending);
         Debug.Log($"{instigator.Data.Name} Defending");
-        instigator.EndTurn();
+        instigator.EndTurnWithDelay(3);
     }
 }

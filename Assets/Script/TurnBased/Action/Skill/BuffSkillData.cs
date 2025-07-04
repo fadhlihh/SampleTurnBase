@@ -20,6 +20,7 @@ public class BuffSkillData : SkillData
                 Instantiate<ParticleSystem>(VisualFX, instigator.transform);
                 SFXManager.Instance.BuffSpellSFX?.Play();
                 Debug.Log($"{instigator.Data.Name} Apply Skill {Name} on self");
+                CameraManager.Instance.SwitchCamera(ECameraType.TargetCamera, instigator);
                 instigator.PerformSkill(SkillPoint);
                 break;
             case ETargetingMode.ManualSelectionAlly:
@@ -32,7 +33,7 @@ public class BuffSkillData : SkillData
                 }
                 TargetSelector.Instance.StartSelectCharacter(targets, target =>
                 {
-                    CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
+                    CameraManager.Instance.SwitchCamera(ECameraType.TargetCamera, target);
                     target.ApplyBuff(BuffedStat, Amount, Duration);
                     Instantiate<ParticleSystem>(VisualFX, target.transform);
                     SFXManager.Instance.BuffSpellSFX?.Play();

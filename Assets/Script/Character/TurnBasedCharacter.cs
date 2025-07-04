@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,11 +14,15 @@ public class TurnBasedCharacter : Character, IDamagable
     [SerializeField]
     private Transform _lookPivot;
     [SerializeField]
+    private Transform _turnCameraPosition;
+    [SerializeField]
     private FloatNumberUI _floatNumberUI;
     [SerializeField]
     private List<SkillData> _skills = new List<SkillData>();
     [SerializeField]
     private List<ItemData> _items = new List<ItemData>();
+    [SerializeField]
+    private SelectorUI _selectorUI;
 
     protected List<TurnBasedAction> _actions = new List<TurnBasedAction>();
 
@@ -50,9 +55,11 @@ public class TurnBasedCharacter : Character, IDamagable
     public int Speed => CalculateModifiedStat(EStatType.Speed);
     public bool IsDefending { get; set; }
     public bool IsDead { get; protected set; }
+    public SelectorUI SelectorUI { get => _selectorUI; }
     public CharacterData Data { get => _data; }
     public Vector3 AttackerPosition { get => (_attackerPosition != null) ? _attackerPosition.position : Vector3.zero; }
     public Transform LookPivot { get => _lookPivot; }
+    public Transform TurnCameraPosition { get => _turnCameraPosition; }
     public List<SkillData> Skills { get => _skills; }
     public List<ItemData> Items { get => _items; }
 
@@ -64,16 +71,28 @@ public class TurnBasedCharacter : Character, IDamagable
     public virtual void BeginTurn()
     {
         Debug.Log($"{Data.Name} Begin Turn");
+        _selectorUI.ShowTurnIcon();
+        CameraManager.Instance.SwitchCamera(ECameraType.TargetCamera, this);
         OnBeginTurn?.Invoke();
     }
 
     public virtual void EndTurn()
     {
         Debug.Log($"{Data.Name} End Turn");
-        CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
         OnEndTurn?.Invoke();
         ReduceBuffDuration();
         TurnBasedManager.Instance.NextTurn();
+    }
+
+    public void EndTurnWithDelay(float delayTime)
+    {
+        StartCoroutine(DelayedEndTurn(delayTime));
+    }
+
+    private IEnumerator DelayedEndTurn(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        EndTurn();
     }
 
     public void Damage(int value)
@@ -116,7 +135,7 @@ public class TurnBasedCharacter : Character, IDamagable
     public virtual void PerformSkill(int skillPointCost)
     {
         OnPerformedSkill?.Invoke(SkillPoint, MaximumSkillPoint);
-        EndTurn();
+        EndTurnWithDelay(3);
     }
 
     public void HandleEndAction()

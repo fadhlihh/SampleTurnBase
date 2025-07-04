@@ -34,7 +34,7 @@ public class ItemAction : TurnBasedAction
 
     public override void Execute(TurnBasedCharacter instigator)
     {
-        CameraManager.Instance.SwitchCamera(ECameraType.SelfCamera, instigator);
+        CameraManager.Instance.SwitchCamera(ECameraType.TrackingCamera, instigator);
         ItemMenuUI.Instance.Show(_items, instigator, UseItem);
     }
 

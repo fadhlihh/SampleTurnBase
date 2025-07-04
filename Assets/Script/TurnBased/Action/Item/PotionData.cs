@@ -14,9 +14,7 @@ public class PotionData : ItemData
         switch (TargetingMode)
         {
             case ETargetingMode.Self:
-                Consume(instigator);
-                Instantiate<ParticleSystem>(VisualFX, instigator.transform);
-                instigator.EndTurn();
+                Consume(instigator, instigator);
                 break;
             case ETargetingMode.ManualSelectionAlly:
                 IEnumerable<TurnBasedCharacter> targets = instigator is PlayerCharacter ?
@@ -28,10 +26,8 @@ public class PotionData : ItemData
                 }
                 TargetSelector.Instance.StartSelectCharacter(targets, target =>
                 {
-                    CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
-                    Consume(target);
-                    Instantiate<ParticleSystem>(VisualFX, target.transform);
-                    instigator.EndTurn();
+                    CameraManager.Instance.SwitchCamera(ECameraType.TargetCamera, target);
+                    Consume(instigator, target);
                 });
                 break;
             default:
@@ -39,8 +35,9 @@ public class PotionData : ItemData
         }
     }
 
-    public void Consume(TurnBasedCharacter target)
+    public void Consume(TurnBasedCharacter instigator, TurnBasedCharacter target)
     {
+        Instantiate<ParticleSystem>(VisualFX, target.transform);
         switch (EffectType)
         {
             case EPotionEffectType.Heal:
@@ -52,6 +49,7 @@ public class PotionData : ItemData
             default:
                 break;
         }
+        instigator.EndTurnWithDelay(3);
     }
 }
 

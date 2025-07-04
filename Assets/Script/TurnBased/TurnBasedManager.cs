@@ -17,6 +17,7 @@ public class TurnBasedManager : SingletonBehaviour<TurnBasedManager>
     private TurnBasedCharacter _currentCharacter;
 
     public List<TurnBasedCharacter> Characters { get => _characters; }
+    public TurnBasedCharacter CurrentCharacter { get => _currentCharacter; }
 
     protected virtual void Start()
     {
@@ -37,8 +38,9 @@ public class TurnBasedManager : SingletonBehaviour<TurnBasedManager>
 
     public void CancelAction()
     {
-        CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
+        CameraManager.Instance.SwitchCamera(ECameraType.TargetCamera, _currentCharacter);
         HUDManager.Instance.PlayerActionUI.Show();
+        _currentCharacter.SelectorUI.ShowTurnIcon();
     }
 
     public void NextTurn()
@@ -103,6 +105,7 @@ public class TurnBasedManager : SingletonBehaviour<TurnBasedManager>
         if (action != null)
         {
             action.Execute(_currentCharacter);
+            _currentCharacter.SelectorUI.Hide();
         }
     }
 

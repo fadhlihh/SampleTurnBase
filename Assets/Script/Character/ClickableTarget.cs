@@ -6,8 +6,6 @@ public class ClickableTarget : MonoBehaviour
 {
     [SerializeField]
     private TurnBasedCharacter _ownerCharacter;
-    [SerializeField]
-    private SelectorUI _selectorUI;
 
     public bool IsSelecting { get; set; }
 
@@ -17,19 +15,26 @@ public class ClickableTarget : MonoBehaviour
     {
         Debug.Log("Click");
         OnClicked?.Invoke(_ownerCharacter);
-        _selectorUI.Hide();
+        _ownerCharacter.SelectorUI.Hide();
     }
 
     private void OnMouseEnter()
     {
         if (IsSelecting)
         {
-            _selectorUI.Show();
+            _ownerCharacter.SelectorUI.ShowSelector();
         }
     }
 
     private void OnMouseExit()
     {
-        _selectorUI.Hide();
+        if (TurnBasedManager.Instance.CurrentCharacter == _ownerCharacter)
+        {
+            _ownerCharacter.SelectorUI.ShowTurnIcon();
+        }
+        else
+        {
+            _ownerCharacter.SelectorUI.Hide();
+        }
     }
 }

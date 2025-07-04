@@ -228,6 +228,7 @@ Transform:
   - {fileID: 4556090873554158274}
   - {fileID: 1826901414792722060}
   - {fileID: 7971419166058376861}
+  - {fileID: 827918698516440872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2871620993728794909
@@ -267,11 +268,13 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: 148bd8d16103a9c43b5e0b5115199d5e, type: 2}
   _attackerPosition: {fileID: 5247206461536659971}
   _lookPivot: {fileID: 997106094133358774}
+  _turnCameraPosition: {fileID: 827918698516440872}
   _floatNumberUI: {fileID: 6670270377445634302}
   _skills:
   - {fileID: 11400000, guid: 386fa11daeb589d41acac3fe9755c02f, type: 2}
   _items:
   - {fileID: 11400000, guid: eccc8695fc7e23a45a4125f2e044d847, type: 2}
+  _selectorUI: {fileID: 1824609344833070599}
   OnBeginTurn:
     m_PersistentCalls:
       m_Calls: []
@@ -392,6 +395,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnDefending:
+    m_PersistentCalls:
+      m_Calls: []
   _enemyUI: {fileID: 4828275515075950346}
 --- !u!114 &5036593213560821174
 MonoBehaviour:
@@ -406,7 +412,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownerCharacter: {fileID: 8632868141506747920}
-  _selectorUI: {fileID: 1824609344833070599}
   OnClicked:
     m_PersistentCalls:
       m_Calls: []
@@ -624,7 +629,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.007, y: 2.121}
+  m_AnchoredPosition: {x: 0.007, y: 2.1}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &633877312646079776
@@ -702,6 +707,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c3322bed2f6974d9b0c7e260aa3035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selectorIcon: {fileID: 464764896987650069}
+  _selectorIconColor: {r: 1, g: 1, b: 1, a: 1}
+  _turnIconColor: {r: 0.25618547, g: 0.42303655, b: 0.9528302, a: 1}
 --- !u!1 &858592697349396572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2517,6 +2525,37 @@ Transform:
   m_Children:
   - {fileID: 5325139699393741785}
   m_Father: {fileID: 3041238308525671630}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6734117097192681696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827918698516440872}
+  m_Layer: 0
+  m_Name: TurnCameraPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &827918698516440872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6734117097192681696}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.676, y: 1.225, z: 2.507}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 690832106761379570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6746516640177378152
 GameObject:

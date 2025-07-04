@@ -29,6 +29,7 @@ public class CameraManager : SingletonBehaviour<CameraManager>
         }
         GameCamera camera = _cameras.Find(camera => camera.Type == newCamera);
         _currentActiveCamera = camera;
-        _currentActiveCamera.Activate(instigator, target);
+        Debug.Log(_currentActiveCamera);
+        _currentActiveCamera?.Activate(instigator, target);
     }
 }

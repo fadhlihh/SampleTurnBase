@@ -13,7 +13,7 @@ public class BeamSkillData : SkillData
         CameraManager.Instance.SwitchCamera(ECameraType.EnemyCamera, instigator);
         TargetSelector.Instance.StartSelectCharacter(enemies, target =>
                 {
-                    CameraManager.Instance.SwitchCamera(ECameraType.DefaultCamera);
+                    CameraManager.Instance.SwitchCamera(ECameraType.TargetCamera, target);
                     instigator.PerformSkill(SkillPoint);
                     Instantiate<ParticleSystem>(VisualFX, target.transform);
                     SFXManager.Instance.BeamSpellSFX?.Play();
